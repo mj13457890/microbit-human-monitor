@@ -3,14 +3,13 @@ OLED.init(128, 64)
 radio.set_group(20)
 
 def on_forever():
-    global n
     if pins.digital_read_pin(DigitalPin.P0) == 0:
         n = 3
         OLED.clear()
         OLED.write_string_new_line("If you don't turn back within 3 seconds, the water will shoot out and the egg will break.")
         for index in range(3):
             OLED.write_num(n)
-            n += -1
+            n -= 1
             basic.pause(1000)
         if pins.digital_read_pin(DigitalPin.P0) == 0:
             OLED.write_string_new_line("fire")
